@@ -43,7 +43,7 @@ namespace Practice
             fi = Math.Sqrt((TxT.A / Math.PI) * ksi * (TxT.alpha + TxT.a * TxT.beta));
             teta = Math.Sqrt((TxT.A / Math.PI) * (TxT.alpha - TxT.a * TxT.beta));
 
-            for (int j = 0; j < TxT.m-1; j++)
+            for (int j = 0; j < TxT.m; j++)
             {
                 DeX[j, 0] = TxT.A;
                 DeH[j, 0] = TxT.A * (Math.Pow(TxT.beta, 2) + 3 * Math.Pow(TxT.alpha, 2) - 2 * TxT.alpha * TxT.a * TxT.beta - 2 * Math.Sqrt((TxT.alpha - TxT.a * TxT.beta) * (TxT.a * Math.Pow(TxT.beta, 3) + Math.Pow(TxT.beta, 2) * TxT.alpha + TxT.a * TxT.beta * Math.Pow(TxT.alpha, 2) + Math.Pow(TxT.alpha, 3))));
