@@ -80,6 +80,15 @@ namespace Practice
                 }
             }
         }
+        
+        public double ExpectationValue(TextInput TxT, int FactorChosen, double[,] InpVec)
+        {
+            double ExpectValue = double.MaxValue;
+            for (int i = 300; i < TxT.n - 1; i++)
+                ExpectValue = ExpectValue + InpVec[FactorChosen, i];
+            return ExpectValue / (TxT.n - 301);
+        }
+        
         public ArrayData()
         { }
     }
