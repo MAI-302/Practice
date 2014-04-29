@@ -131,3 +131,69 @@ namespace Practice
             zedGraph.AxisChange();
             zedGraph.Refresh();
         }
+        private void DeX_Plot_Click(object sender, EventArgs e)
+        {
+            DrawGraph(ArrDat.DeX);
+        }
+        private void DeH_Plot_Click(object sender, EventArgs e)
+        {
+            DrawGraph(ArrDat.DeH);
+        }
+        private void KeXH_Plot_Click(object sender, EventArgs e)
+        {
+            DrawGraph(ArrDat.KeXH);
+        }
+        private void Help_Button_Click(object sender, EventArgs e)
+        {
+            help.ShowDialog();
+        }
+        private void Time2_Plot_Click(object sender, EventArgs e)
+        {
+            DrawGraph(ArrDat.a_tt);
+        }
+        private void Time1_Plot_Click(object sender, EventArgs e)
+        {
+            DrawGraph(ArrDat.A_tt);
+        }
+        private void SimulateTheFilter_Click(object sender, EventArgs e)
+        {
+            DrawGraph(ArrDat.Y1, ArrDat.X, 0);
+            isAxisAdded = true;
+            label2.Text = "M[E] = " + ArrDat.ExpectationValue(0, ArrDat.E).ToString();
+            
+            label3.Text = "D[E] = " + ArrDat.Variance(TxT, 0, 0, ArrDat.E).ToString();
+            
+            label4.Text = "M[X] = " + ArrDat.ExpectationValue(0, ArrDat.X).ToString();
+
+            label5.Text = "D[X] = " + ArrDat.Variance(TxT, 0, TxT.factor[1], ArrDat.X).ToString();
+        }
+        private void SimulateTheFilter2_Click(object sender, EventArgs e)
+        {
+            DrawGraph(ArrDat.Y1, ArrDat.X, 1);
+            isAxisAdded = true;
+            label2.Text = "M[E] = " + ArrDat.ExpectationValue(1, ArrDat.E).ToString();
+            
+            label3.Text = "D[E] = " + ArrDat.Variance(TxT, 1, 0, ArrDat.E).ToString();
+            
+            label4.Text = "M[X] = " + ArrDat.ExpectationValue(1, ArrDat.X).ToString();
+            
+            label5.Text = "D[X] = " + ArrDat.Variance(TxT, 1, 0, ArrDat.X).ToString();
+        }
+        private void SimulateTheFilter3_Click(object sender, EventArgs e)
+        {
+            DrawGraph(ArrDat.Y1, ArrDat.X, 2);
+            isAxisAdded = true;
+            label2.Text = "M[E] = " + ArrDat.ExpectationValue(2, ArrDat.E).ToString();
+            
+            label3.Text = "D[E] = " + ArrDat.Variance(TxT, 2, 0, ArrDat.E).ToString();
+            
+            label4.Text = "M[X] = " + ArrDat.ExpectationValue(2, ArrDat.X).ToString();
+            
+            label5.Text = "D[X] = " + ArrDat.Variance(TxT, 2, 0, ArrDat.X).ToString();
+        }
+        private void Exitbutton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+    }
+}
