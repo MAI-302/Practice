@@ -88,7 +88,14 @@ namespace Practice
                 ExpectValue = ExpectValue + InpVec[FactorChosen, i];
             return ExpectValue / (TxT.n - 301);
         }
-        
+ 
+        public double Variance(TextInput TxT, int FactorChosen, double Me, double[,] InpVec)
+        {
+            double Dispersion = double.MinValue;
+            for (int i = 0; i < TxT.n-301; i++)
+                Dispersion = Dispersion + Math.Pow((InpVec[FactorChosen, i] - Me), 2);
+            return Dispersion / (TxT.n - 302);
+        }   
         public ArrayData()
         { }
     }
