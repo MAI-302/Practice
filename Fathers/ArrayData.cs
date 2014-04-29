@@ -95,7 +95,17 @@ namespace Practice
             for (int i = 0; i < TxT.n-301; i++)
                 Dispersion = Dispersion + Math.Pow((InpVec[FactorChosen, i] - Me), 2);
             return Dispersion / (TxT.n - 302);
-        }   
+        } 
+        
+        public void NormalDistribution()
+        {
+            Troschuetz.Random.NormalDistribution randd = new Troschuetz.Random.NormalDistribution();
+            randd.Mu = 0;
+            randd.Sigma = 25.066;
+            for (int i = 0; i < NormalArray.Length - 1; i++)
+                NormalArray[i] = randd.NextDouble();
+        }
+        
         public ArrayData()
         { }
     }
