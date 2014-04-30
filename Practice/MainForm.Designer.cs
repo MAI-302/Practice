@@ -37,7 +37,6 @@
             this.Help_Button = new System.Windows.Forms.Button();
             this.Time2_Plot = new System.Windows.Forms.Button();
             this.SimulateTheFilter = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.SimulateTheFilter2 = new System.Windows.Forms.Button();
             this.SimulateTheFilter3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,7 +45,6 @@
             this.Exitbutton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // DeX_Plot
@@ -134,16 +132,6 @@
             this.SimulateTheFilter.UseVisualStyleBackColor = true;
             this.SimulateTheFilter.Click += new System.EventHandler(this.SimulateTheFilter_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(173, 20);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(71, 25);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "y[2]L[2]";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // SimulateTheFilter2
             // 
             this.SimulateTheFilter2.Location = new System.Drawing.Point(84, 250);
@@ -215,22 +203,11 @@
             this.label5.Size = new System.Drawing.Size(0, 13);
             this.label5.TabIndex = 18;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(173, 55);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(71, 25);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "y[2]L[2]";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 562);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Exitbutton);
@@ -239,7 +216,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SimulateTheFilter3);
             this.Controls.Add(this.SimulateTheFilter2);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.SimulateTheFilter);
             this.Controls.Add(this.Time2_Plot);
             this.Controls.Add(this.Help_Button);
@@ -270,7 +246,6 @@
         private System.Windows.Forms.Button Help_Button;
         private System.Windows.Forms.Button Time2_Plot;
         private System.Windows.Forms.Button SimulateTheFilter;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button SimulateTheFilter2;
         private System.Windows.Forms.Button SimulateTheFilter3;
         private System.Windows.Forms.Label label1;
@@ -279,7 +254,6 @@
         private System.Windows.Forms.Button Exitbutton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -63,106 +63,6 @@ namespace Practice
             TxT.n = Int32.Parse(SupportStringArray[7]);
             return TxT;
         }
-        private double y_1(double x)
-        {
-            return -21 / (1 * (x - 9.425)) - 9;
-        }
-        private double y_4(double x)
-        {
-            return -21 / (1 * (x - 9.425)) + 9;
-        }
-        private double y_5(double x)
-        {
-            return Math.Pow((x-9.425),2) * 10 - 30.8;
-        }
-        private double y_2(double x)
-        {
-            return Math.Sqrt(x + 5*Math.Pow(x, 2));
-        }
-        private double y_3 (double x)
-        {
-            return 4.2 * Math.Sin(3*x);
-        }
-        private void DrawGraph()
-        {
-            int i = 0;
-            GraphPane Pane = zedGraph.GraphPane;
-            Pane.CurveList.Clear();
-            PointPairList PairList = new PointPairList();
-            double xmin = 0;
-            double xmax = 20;
-            double Raznost = xmax - xmin;
-            for (double x = xmin; x <= xmax; x += 0.01)
-            {
-                PairList.Add(x, y_5(x));
-            }
-            i++;
-            LineItem myCurve = Pane.AddCurve("", PairList, Color.Blue, SymbolType.None);
-            zedGraph.AxisChange();
-            zedGraph.Refresh();
-        }
-        private void DrawGraph1()
-        {
-            GraphPane Pane = zedGraph.GraphPane;
-            Pane.CurveList.Clear();
-            PointPairList PairList = new PointPairList();
-            PointPairList PairList2 = new PointPairList();
-            PointPairList PairList3 = new PointPairList();
-            PointPairList PairList4 = new PointPairList();
-            PointPairList PairList5 = new PointPairList();
-            PointPairList PairList6 = new PointPairList();
-            PointPairList PairList7 = new PointPairList();
-            PointPairList PairList8 = new PointPairList();
-            double xmin = 7.33;
-            double xmax = 7.85;
-            double Raznost = xmax - xmin;
-            for (double x = xmin; x <= xmax; x += 0.01)
-            {
-                PairList.Add(x, y_3(x));
-                PairList2.Add(x, -y_3(x));
-            }
-            xmin = 7.85;
-            xmax = 8.85;
-            for (double x = xmin; x <= xmax; x += 0.01)
-            {
-                PairList5.Add(x, y_1(x));
-            }
-            xmin = 8.85;
-            xmax = 10;
-            for (double x = xmin; x <= xmax; x += 0.01)
-            {
-                PairList7.Add(x, -y_5(x));
-            }
-            xmin = 10;
-            xmax = 11;
-            for (double x = xmin; x <= xmax; x += 0.01)
-            {
-                PairList6.Add(x, -y_4(x));
-            }
-            xmin = 11;
-            xmax = 11.52;
-            for (double x = xmin; x <= xmax; x += 0.01)
-            {
-                PairList3.Add(x, y_3(x));
-                PairList4.Add(x, - y_3(x));
-            }
-            xmin = 7.85;
-            xmax = 11;
-            for (double x = xmin; x <= xmax; x += 0.01)
-            {
-                PairList8.Add(x, -4.201);
-            }
-            LineItem myCurve = Pane.AddCurve("", PairList, Color.Blue, SymbolType.None);
-            LineItem myCurve2 = Pane.AddCurve("", PairList2, Color.Blue, SymbolType.None);
-            LineItem myCurve3 = Pane.AddCurve("", PairList3, Color.Blue, SymbolType.None);
-            LineItem myCurve4 = Pane.AddCurve("", PairList4, Color.Blue, SymbolType.None);
-            LineItem myCurve5 = Pane.AddCurve("", PairList5, Color.Blue, SymbolType.None);
-            LineItem myCurve6 = Pane.AddCurve("", PairList6, Color.Blue, SymbolType.None);
-            LineItem myCurve7 = Pane.AddCurve("", PairList7, Color.Blue, SymbolType.None);
-            LineItem myCurve8 = Pane.AddCurve("", PairList8, Color.Blue, SymbolType.None);
-            zedGraph.AxisChange();
-            zedGraph.Refresh();
-        }
         private void DrawGraph(double[] ArrayArray)
         {
             int i = 0;
@@ -254,10 +154,6 @@ namespace Practice
         {
             DrawGraph(ArrDat.A_tt);
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            DrawGraph1();
-        }
         private void SimulateTheFilter_Click(object sender, EventArgs e)
         {
             DrawGraph(ArrDat.Y1, ArrDat.X, 0);
@@ -297,11 +193,6 @@ namespace Practice
         private void Exitbutton_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DrawGraph();
         }
     }
 }
