@@ -95,8 +95,6 @@ namespace Practice
         public void NormalDistribution()
         {
             Troschuetz.Random.NormalDistribution randd = new Troschuetz.Random.NormalDistribution();
-            //Я пока, до конца, не разобрался, как комментить код в GitHub, но пусть, пока, будет так. 
-            //Что такое Troschuetz. Нигде не могу найти. Желательно ответ по-подробнее.
             randd.Mu = 0;
             randd.Sigma = 25.066;
             for (int i = 0; i < NormalArray.Length - 1; i++)
