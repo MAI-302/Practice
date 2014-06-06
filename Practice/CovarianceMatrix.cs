@@ -98,7 +98,7 @@ namespace Practice
         {
             Troschuetz.Random.NormalDistribution NormRand = new Troschuetz.Random.NormalDistribution();
             NormRand.Mu = 0;
-            NormRand.Sigma = Math.PI * 2 * LocalID.Sv / 0.01;
+            NormRand.Sigma = Math.Sqrt(Math.PI * 2 * 1 / 0.01);
             for (int i = 0; i < NormalArray.Length - 1; i++)
                 NormalArray[i] = NormRand.NextDouble();
         }

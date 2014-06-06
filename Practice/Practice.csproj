@@ -71,13 +71,13 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Troschuetz.Random">
-      <HintPath>bin\Debug\Troschuetz.Random.dll</HintPath>
+      <HintPath>..\..\..\Visual Studio 2012\Troschuetz\Troschuetz.Random.dll</HintPath>
     </Reference>
     <Reference Include="ZedGraph">
-      <HintPath>..\..\..\Разное\zedgraph_dll_v5.1.5\ZedGraph.dll</HintPath>
+      <HintPath>..\..\..\Visual Studio 2012\zedgraph_dll_v515\zedgraph_dll_v515\zedgraph_dll_v5.1.5\ZedGraph.dll</HintPath>
     </Reference>
     <Reference Include="ZedGraph.Web">
-      <HintPath>..\..\..\Разное\zedgraph_dll_v5.1.5\ZedGraph.Web.dll</HintPath>
+      <HintPath>..\..\..\Visual Studio 2012\zedgraph_dll_v515\zedgraph_dll_v515\zedgraph_dll_v5.1.5\ZedGraph.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
