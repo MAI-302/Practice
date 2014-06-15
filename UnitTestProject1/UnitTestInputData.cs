@@ -9,7 +9,9 @@ namespace CovarianceMatrix
         [TestMethod]
         public void TestInputData()
         {
+            //Переменная, в которой отмечается, пройден ли тест.
             bool ItsOK = true;
+            //Объявление параметров, которые поступают на вход маетодам экземплярам классов, которые проходят проверку.
             int Rows = 3;
             int Columns = 5000;
             double A = 1.621;
@@ -22,11 +24,11 @@ namespace CovarianceMatrix
             double sigma = 3.464;
             double teta = 0.286;
             double fi = 4.414;
-
-            ///////////////////////////////////////////////////
+            
+            //Объявление экземпляра формирующего фильтра.
             Practice.Filter.FormingFilter TestFormingFilter = null;
-            ///////////////////////////////////////////////////
-
+            
+            //Попытка инициализации этого экземплряра и запуск метода с данными параметрами.
             try
             {
                 TestFormingFilter = new Practice.Filter.FormingFilter(Rows, Columns, tau, ksi, sigma, teta, fi);
@@ -36,10 +38,11 @@ namespace CovarianceMatrix
             {
                 ItsOK = false;
             }
-
-            ///////////////////////////////////////////////////
+            
+            //Объявление экземпляра матрицы коваиаций.
             Practice.Filter.Covariance TestMatrix = null;
-            ///////////////////////////////////////////////////
+            
+            //Попытка инициализации этого экземплряра и запуск метода с данными параметрами.
             try
             {
 
@@ -50,8 +53,11 @@ namespace CovarianceMatrix
             {
                 ItsOK = false;
             }
-
-            ///////////////////////////////////////////////////
+            
+            //Объявление экземпляра фильтра калмана.
+            Practice.Filter.KalmanFilter TestKalmanFilter = null;
+            
+            //Попытка инициализации этого экземплряра и запуск метода с данными параметрами.
             try
             {
                 Practice.Filter.KalmanFilter TestKalmanFilter = new Practice.Filter.KalmanFilter(Rows, Columns, TestFormingFilter.X, TestMatrix);
@@ -61,8 +67,8 @@ namespace CovarianceMatrix
             {
                 ItsOK = false;
             }
-            ///////////////////////////////////////////////////
-
+            
+            //Если при данных параметрах во время создания экземпляра или в ходе работы метода будет ошибка, то тест не будет пройден.
             Assert.IsTrue(ItsOK);
         }
     }
