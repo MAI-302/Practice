@@ -6,6 +6,7 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTestCalculateCalmanFilter
     {
+        //Метод проверки Правильности работы фильтрации фильтра калмана.
         [TestMethod]
         public void CalculateCalmanFilter()
         {
