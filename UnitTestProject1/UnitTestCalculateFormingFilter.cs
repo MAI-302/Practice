@@ -6,6 +6,7 @@ namespace Practice.Signal
     [TestClass]
     public class UnitTestCalculateFormingFilter
     {
+        //Метод проверки Правильности работы фильтрации формирующего фильтра.
         [TestMethod]
         public void CalculateFormingFilter()
         {
