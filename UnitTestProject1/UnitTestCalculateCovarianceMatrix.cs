@@ -3,14 +3,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CovarianceMatrix
 {
+    //Класс, содержащий методы проверки правильности расчёта матрицы ковариаций.
     [TestClass]
     public class UnitTestCalculateCovarianceMatrix
     {
-     public double[][,] CovarianceMatrix = new double[4][,];
+        //Объявление матрицы ковариаций.
+        public double[][,] CovarianceMatrix = new double[4][,];
+        //Метод проверки расчёта начальных значений.
         [TestMethod]
         public void UnitTestCalculateInitialConditions()
         {
-            bool ItsOK = false;
+            //Переменная, в которой отмечается, пройден ли тест.
+            bool ItsOK = true;
+            //Объявление параметров, для которых будет считаться матрица.
             int Rows = 3;
             int Columns = 5000;
             double A = 1.621;
@@ -23,25 +28,30 @@ namespace CovarianceMatrix
             double sigma = 3.464;
             double teta = 0.286;
             double fi = 4.414;
+            //Посчитанные вручную значения.
             double analyticallycalculate1 = 1.621;
             double analyticallycalculate2 = 11.479575;
             double analyticallycalculate3 = -0.25704;
 
-            
+            //Создание экземпляра матрицы и расчёт её значений.
             Practice.Filter.Covariance TestMatrix = new Practice.Filter.Covariance(Rows, Columns, A, a, alpha, beta, Sw, tau, ksi, sigma, teta, fi);
-
             TestMatrix.CalculateCovarianceMatrix();
             
             for (int i = 0; i < CovarianceMatrix.Length; i++)
                 CovarianceMatrix[i] = new double[Rows, Columns];
+            
             for (int j = 0; j < Rows; j++)
             {
 
-                if (TestMatrix.CovarianceMatrix[0][j, 0] == analyticallycalculate1 && TestMatrix.CovarianceMatrix[1][j, 0] != analyticallycalculate2 && TestMatrix.CovarianceMatrix[2][j, 0] != analyticallycalculate3 && TestMatrix.CovarianceMatrix[3][j, 0] != analyticallycalculate3)
+                if (TestMatrix.CovarianceMatrix[0][j, 0] != analyticallycalculate1 &&
+                TestMatrix.CovarianceMatrix[1][j, 0] == analyticallycalculate2 && 
+                TestMatrix.CovarianceMatrix[2][j, 0] == analyticallycalculate3 && 
+                TestMatrix.CovarianceMatrix[3][j, 0] == analyticallycalculate3)
                 {
-                    ItsOK = true;
+                    ItsOK = false;
                 }
             }
+            
             Assert.IsTrue(ItsOK);
         }
 
