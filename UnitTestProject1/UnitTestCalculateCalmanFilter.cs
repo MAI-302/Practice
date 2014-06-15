@@ -9,8 +9,9 @@ namespace UnitTestProject1
         [TestMethod]
         public void CalculateCalmanFilter()
         {
+            //Переменная, в которой отмечается, пройден ли тест.
             bool ItsOK = false;
-            Practice.Filter.Covariance CM;
+            //Объявление параметров, для которых будет проверяться работа метода фильтра калмана.
             double tau = 0.01;
             double teta = 0.286;
             double sigma = 3.464;
@@ -19,12 +20,18 @@ namespace UnitTestProject1
             double Sv = 0;
             int RowsCount = 3;
             int ColumnsCount = 5000;
+            //Создаём нулевые массивы, в которые будем записывать аналитично посчитанные значения процесса после прохождения фильтрации.
             double[] analyticallycalculateY1 = { 0, 0, 0, 0 };
             double[] analyticallycalculateY2 = { 0, 0, 0, 0 };
+            
+            //Создаём матрицу ковариаций(необходима для работы фильтра).
+            Practice.Filter.Covariance CM;
             CM = new Practice.Filter.Covariance(3, 5000, 1.621, 0.542, 1.732, 2.903, 1.973, 0.01, 11.427, 3.464, 0.286, 4.414);
-
+            
+            //Создаём случайный процесс и генерируем его.
             Practice.Signal.NormalDistributionSignal InitialSignal = new Practice.Signal.NormalDistributionSignal(0, Math.PI * 2 * Sv / tau);
             InitialSignal.GenerateSignal();
+            
             Practice.Filter.FormingFilter FF = new Practice.Filter.FormingFilter(RowsCount, ColumnsCount, tau, ksi, sigma, teta, fi);
             Practice.Filter.KalmanFilter KF = new Practice.Filter.KalmanFilter(RowsCount, ColumnsCount, FF.X, CM);
             FF.Filter();
