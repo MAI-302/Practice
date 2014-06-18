@@ -24,23 +24,30 @@ namespace MainForm
             double sigma = 3.464;
             double teta = 0.286;
             double fi = 4.414;
-            //Объявление экземпляра формирующего фильтра.
+            //Объявление экземпляра матрицы коваиаций.
             Practice.Filter.Covariance TestMatrix = new Practice.Filter.Covariance(Rows, Columns, A, a, alpha, beta, Sw, tau, ksi, sigma, teta, fi);
             TestMatrix.CalculateCovarianceMatrix();
+            //Объявление экземпляра формирующего фильтра и фильтрация.
             Practice.Filter.FormingFilter TestFormingFilter = new Practice.Filter.FormingFilter(Rows, Columns, tau, ksi, sigma, teta, fi);
             TestFormingFilter.Filter();
+            //Объявление экземпляра фильтра калмана и фильтрация.
             Practice.Filter.KalmanFilter TestKalmanFilter = new Practice.Filter.KalmanFilter(Rows, Columns, TestFormingFilter.X, TestMatrix);
             TestKalmanFilter.Filter();
-
+            
+            //Коэфициенты для которых считается дисперсия.
             double[] factor = new double[3] { 0.2, 0.5, 0.8 };
             try
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    if (Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestFormingFilter.X) < 0 ||
-                        Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestKalmanFilter.E) < 0)
+                    //Если при подсчете дисперсии для формирующего фильтра или фильтра калмана дисперсия - отрицательна, то создаём ошибку.
+                    if (Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestFormingFilter.X) < 0 )
                     {
-                        throw new System.Exception("Дисперсия < 0");
+                        throw new System.Exception("Дисперсия формирующего фильтра < 0, при коэффициенте="+factor.ToString());
+                    }
+                    if (Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestKalmanFilter.E) < 0)
+                    {
+                        throw new System.Exception("Дисперсия фильтра калмана < 0, при коэффициенте="+factor.ToString());
                     }
                 }
             }
@@ -48,7 +55,7 @@ namespace MainForm
             {
                 ItsOK = false;
             }
-
+            //Если дисперсия при всех коэффициентах положительна, то тест пройден.
             Assert.IsTrue(ItsOK);
         }
     }
