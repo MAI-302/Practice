@@ -60,7 +60,7 @@ namespace CovarianceMatrix
             //Попытка инициализации этого экземплряра и запуск метода с данными параметрами.
             try
             {
-                Practice.Filter.KalmanFilter TestKalmanFilter = new Practice.Filter.KalmanFilter(Rows, Columns, TestFormingFilter.X, TestMatrix);
+                TestKalmanFilter = new Practice.Filter.KalmanFilter(Rows, Columns, TestFormingFilter.X, TestMatrix);
                 TestKalmanFilter.Filter();
             }
             catch (System.Exception e)

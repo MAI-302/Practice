@@ -36,29 +36,29 @@ namespace CovarianceMatrix
             //Создание экземпляра матрицы и расчёт её значений.
             Practice.Filter.Covariance TestMatrix = new Practice.Filter.Covariance(Rows, Columns, A, a, alpha, beta, Sw, tau, ksi, sigma, teta, fi);
             TestMatrix.CalculateCovarianceMatrix();
-            
+
             for (int i = 0; i < CovarianceMatrix.Length; i++)
                 CovarianceMatrix[i] = new double[Rows, Columns];
-            
+
             for (int j = 0; j < Rows; j++)
             {
 
                 if (TestMatrix.CovarianceMatrix[0][j, 0] != analyticallycalculate1 &&
-                TestMatrix.CovarianceMatrix[1][j, 0] == analyticallycalculate2 && 
-                TestMatrix.CovarianceMatrix[2][j, 0] == analyticallycalculate3 && 
-                TestMatrix.CovarianceMatrix[3][j, 0] == analyticallycalculate3)
+                TestMatrix.CovarianceMatrix[1][j, 0] != analyticallycalculate2 &&
+                TestMatrix.CovarianceMatrix[2][j, 0] != analyticallycalculate3 &&
+                TestMatrix.CovarianceMatrix[3][j, 0] != analyticallycalculate3)
                 {
                     ItsOK = false;
                 }
             }
-            
+
             Assert.IsTrue(ItsOK);
         }
 
         [TestMethod]
         public void UnitTestCalculateNextValues()
         {
-            bool ItsOK = false;
+            bool ItsOK = true;
             int Rows = 3;
             int Columns = 5000;
             double A = 1.621;
@@ -79,17 +79,15 @@ namespace CovarianceMatrix
 
             TestMatrix.CalculateCovarianceMatrix();
 
-            for (int j = 0; j < Rows; j++)
-                for (int i = 0; i < Columns - 1; i++)
-                    if (
-                         TestMatrix.CovarianceMatrix[0][0, 1].ToString().Remove(3) == Convert.ToString(analyticallycalculate1).Remove(3) &&
-                         TestMatrix.CovarianceMatrix[1][0, 1].ToString().Remove(3) == Convert.ToString(analyticallycalculate2).Remove(3) &&
-                         TestMatrix.CovarianceMatrix[2][0, 1].ToString().Remove(3) == Convert.ToString(analyticallycalculate3).Remove(3) &&
-                         TestMatrix.CovarianceMatrix[3][0, 1].ToString().Remove(3) == Convert.ToString(analyticallycalculate3).Remove(3)
-                       )
-                    {
-                        ItsOK = true;
-                    }
+            if (
+                 TestMatrix.CovarianceMatrix[0][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate1).Remove(3) &&
+                 TestMatrix.CovarianceMatrix[1][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate2).Remove(3) &&
+                 TestMatrix.CovarianceMatrix[2][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate3).Remove(3) &&
+                 TestMatrix.CovarianceMatrix[3][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate3).Remove(3)
+               )
+            {
+                ItsOK = false;
+            }
             Assert.IsTrue(ItsOK);
         }
     }
