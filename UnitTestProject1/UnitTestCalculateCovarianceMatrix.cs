@@ -33,13 +33,15 @@ namespace CovarianceMatrix
             double analyticallycalculate2 = 11.479575;
             double analyticallycalculate3 = -0.25704;
 
-            //Создание экземпляра матрицы и расчёт её значений.
+            //Создание экземпляра матрицы и расчёт её значений(начальных).
             Practice.Filter.Covariance TestMatrix = new Practice.Filter.Covariance(Rows, Columns, A, a, alpha, beta, Sw, tau, ksi, sigma, teta, fi);
             TestMatrix.CalculateCovarianceMatrix();
-
-            for (int i = 0; i < CovarianceMatrix.Length; i++)
-                CovarianceMatrix[i] = new double[Rows, Columns];
-
+            
+            //Ненужный кусок 
+            //for (int i = 0; i < CovarianceMatrix.Length; i++)
+            //CovarianceMatrix[i] = new double[Rows, Columns];
+            
+            //В цикле провереяем значения, если значения не совпали с подсчитанными вручную, то отмечаем в логической переменной.
             for (int j = 0; j < Rows; j++)
             {
 
@@ -51,14 +53,16 @@ namespace CovarianceMatrix
                     ItsOK = false;
                 }
             }
-
+            //Если все значения совпали-тест пройден.
             Assert.IsTrue(ItsOK);
         }
 
         [TestMethod]
         public void UnitTestCalculateNextValues()
         {
+            //Переменная, в которой отмечается, пройден ли тест.
             bool ItsOK = true;
+            //Объявление параметров, для которых будет считаться матрица.
             int Rows = 3;
             int Columns = 5000;
             double A = 1.621;
@@ -71,14 +75,16 @@ namespace CovarianceMatrix
             double sigma = 3.464;
             double teta = 0.286;
             double fi = 4.414;
+            //Посчитанные вручную значения.
             double analyticallycalculate1 = 1.621;
             double analyticallycalculate2 = 11.479;
             double analyticallycalculate3 = -0.2553;
-
+            
+            //Создание экземпляра матрицы и расчёт её значений(первых).
             Practice.Filter.Covariance TestMatrix = new Practice.Filter.Covariance(Rows, Columns, A, a, alpha, beta, Sw, tau, ksi, sigma, teta, fi);
-
             TestMatrix.CalculateCovarianceMatrix();
-
+            
+            //Если значения не совпали с подсчитанными вручную, то отмечаем в логической переменной.
             if (
                  TestMatrix.CovarianceMatrix[0][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate1).Remove(3) &&
                  TestMatrix.CovarianceMatrix[1][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate2).Remove(3) &&
@@ -88,6 +94,7 @@ namespace CovarianceMatrix
             {
                 ItsOK = false;
             }
+            //Если все значения совпали-тест пройден.
             Assert.IsTrue(ItsOK);
         }
     }
