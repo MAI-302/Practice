@@ -40,11 +40,12 @@ namespace MainForm
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    //Если при подсчете дисперсии для формирующего фильтра или фильтра калмана дисперсия - отрицательна, то создаём ошибку.
+                    //Если при подсчете дисперсия для формирующего фильтра  - отрицательна, то создаём ошибку с соответсвующим сообщением.
                     if (Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestFormingFilter.X) < 0 )
                     {
                         throw new System.Exception("Дисперсия формирующего фильтра < 0, при коэффициенте="+factor.ToString());
                     }
+                    //Если при подсчете дисперсия для  фильтра калмана дисперсия - отрицательна, то создаём ошибку с соответсвующим сообщением.
                     if (Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestKalmanFilter.E) < 0)
                     {
                         throw new System.Exception("Дисперсия фильтра калмана < 0, при коэффициенте="+factor.ToString());
