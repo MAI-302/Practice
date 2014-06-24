@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Text;
 using System.Windows.Forms;
-using ZedGraph;
+using System.IO;
+using System.Xml.Serialization;
 namespace Practice
 {
     public partial class MainForm : Form
     {
-        private InitialData ID = new InitialData();
         private Graphics Gr;
-
-        private CovarianceMatrix CM;
-        private FormingFilter FF;
-        private KalmanFilter KF;
+        Controller ctrl = new Controller();
 
         private static bool isAxisAdded = false;
         //Коэффициенты, с которыми вычисляется значение входного/выходного сигнала, ошибки или другого значения, необходимого для работы фильтра Калмана
@@ -29,10 +23,8 @@ namespace Practice
         private void MainForm_Load(object sender, EventArgs e)
         {
             Gr = new Graphics(ref zedGraph);
-            ID.ReadInputData();
-            CM = new CovarianceMatrix(ref ID);
-            FF = new FormingFilter(ref ID);
-            KF = new KalmanFilter(ref ID, ref FF);
+            ctrl.FF.Filter();
+            ctrl.KF.Filter();
         }
         private void Help_Button_Click(object sender, EventArgs e)
         {
@@ -42,35 +34,35 @@ namespace Practice
         }
         private void DeX_Plot_Click(object sender, EventArgs e)
         {
-            Gr.DrawGraph(CM.DeX);
+            Gr.DrawGraph(ctrl.CM.CovarianceMatrix[0]);
         }
         private void DeH_Plot_Click(object sender, EventArgs e)
         {
-            Gr.DrawGraph(CM.DeH);
+            Gr.DrawGraph(ctrl.CM.CovarianceMatrix[1]);
         }
         private void KeXH_Plot_Click(object sender, EventArgs e)
         {
-            Gr.DrawGraph(CM.KeXH);
+            Gr.DrawGraph(ctrl.CM.CovarianceMatrix[2]);
         }
         private void Time2_Plot_Click(object sender, EventArgs e)
         {
-            Gr.DrawGraph(KF.a_tt);
+            Gr.DrawGraph(ctrl.KF.a_tt);
         }
         private void Time1_Plot_Click(object sender, EventArgs e)
         {
-            Gr.DrawGraph(KF.A_tt);
+            Gr.DrawGraph(ctrl.KF.A_tt);
         }
         private void OutputFilterGraphicAndStats(MatrixFactor mf)
         {
-            Gr.DrawGraph(KF.Y1, FF.X, (byte)mf, isAxisAdded);
+            Gr.DrawGraph(ctrl.KF.OutputSignal, ctrl.FF.OutputSignal, (byte)mf, isAxisAdded);
             isAxisAdded = true;
-            label2.Text = "M[E] = " + StatisticalCharacteristics.ExpectationValue((byte)mf, KF.E).ToString();
+            label2.Text = "M[E] = " + StatisticalCharacteristics.ExpectationValue((byte)mf, ctrl.KF.E).ToString();
 
-            label3.Text = "D[E] = " + StatisticalCharacteristics.Variance((byte)mf, KF.E).ToString();
+            label3.Text = "D[E] = " + StatisticalCharacteristics.Variance((byte)mf, ctrl.KF.E).ToString();
 
-            label4.Text = "M[X] = " + StatisticalCharacteristics.ExpectationValue((byte)mf, FF.X).ToString();
+            label4.Text = "M[X] = " + StatisticalCharacteristics.ExpectationValue((byte)mf, ctrl.FF.OutputSignal).ToString();
 
-            label5.Text = "D[X] = " + StatisticalCharacteristics.Variance((byte)mf, FF.X).ToString();
+            label5.Text = "D[X] = " + StatisticalCharacteristics.Variance((byte)mf, ctrl.FF.OutputSignal).ToString();
         }
         private void SimulateTheFilter_Click(object sender, EventArgs e)
         {
