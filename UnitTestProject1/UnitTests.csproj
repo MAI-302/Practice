@@ -56,10 +56,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestInputData2.cs" />
     <Compile Include="UnitTestDispersion.cs" />
     <Compile Include="UnitTestCalculateCalmanFilter.cs" />
     <Compile Include="UnitTestCalculateFormingFilter.cs" />
-    <Compile Include="UnitTestInputData.cs" />
+    <Compile Include="UnitTestInputData1.cs" />
     <Compile Include="UnitTestCalculateCovarianceMatrix.cs" />
   </ItemGroup>
   <ItemGroup>

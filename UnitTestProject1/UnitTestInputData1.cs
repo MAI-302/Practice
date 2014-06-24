@@ -4,10 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CovarianceMatrix
 {
     [TestClass]
-    public class UnitTestInputData
+    public class UnitTestInputData1
     {
         [TestMethod]
-        public void TestInputData()
+        public void TestInputData1()
         {
             //Переменная, в которой отмечается, пройден ли тест.
             bool ItsOK = true;
