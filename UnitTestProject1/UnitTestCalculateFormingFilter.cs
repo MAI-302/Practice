@@ -1,17 +1,20 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Practice.Signal
+namespace Practice
 {
+    /// <summary>
+    /// Класс, содержащий методы проверки правильности работы фильтрации формирующего фильтра.
+    /// </summary>
     [TestClass]
     public class UnitTestCalculateFormingFilter
     {
-        //Метод проверки Правильности работы фильтрации формирующего фильтра.
+        /// <summary>
+        /// Метод проверки Правильности работы фильтрации формирующего фильтра.
+        /// </summary>
         [TestMethod]
         public void CalculateFormingFilter()
         {
-            //Переменная, в которой отмечается, пройден ли тест.
-            bool ItsOK = true;
             //Объявление параметров, для которых будет проверяться работа метода фильтрации формирующего фильтра.
             double tau = 0.01;
             double teta = 0.286;
@@ -36,19 +39,24 @@ namespace Practice.Signal
             for (int i = 0; i < 3; i++)
             {
                 //Считаем значения по разностным формулам.
-                analyticallycalculateX[i + 1] = analyticallycalculateX[i] + tau * (analyticallycalculateH[i] + teta * FF.InitialSignal.SignalArray[i]);
-                analyticallycalculateH[i + 1] = analyticallycalculateH[i] + tau * ((fi - sigma * teta) * FF.InitialSignal.SignalArray[i] - sigma * analyticallycalculateH[i] - ksi * analyticallycalculateX[i]);
-                if 
+                analyticallycalculateX[i + 1] = analyticallycalculateX[i] + tau * 
+                    (
+                        analyticallycalculateH[i] + teta * FF.InitialSignal.SignalArray[i]
+                    );
+
+                //Считаем значения по разностным формулам.
+                analyticallycalculateH[i + 1] = analyticallycalculateH[i] + tau * 
+                    (
+                        (fi - sigma * teta) * FF.InitialSignal.SignalArray[i] - sigma * analyticallycalculateH[i] - ksi * analyticallycalculateX[i]
+                    );
+
+                //Если значения не совпали с подсчитанными вручную, то тест не пройден.
+                Assert.IsFalse
                 (
                     FF.X[0, i + 1].ToString().Remove(4) != analyticallycalculateX[i + 1].ToString().Remove(4) ||
                     FF.H[0, i + 1].ToString().Remove(4) != analyticallycalculateH[i + 1].ToString().Remove(4)
-                )
-                {
-                    ItsOK = false;
-                }
+                );
             }
-            //Если значения совпали-тест пройден.
-            Assert.IsTrue(ItsOK);
         }
     }
 }

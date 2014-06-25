@@ -3,16 +3,23 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CovarianceMatrix
 {
+    /// <summary>
+    /// Тест проверки работы конструкторов и основных методов классов при определенных параметрах.
+    /// </summary>
     [TestClass]
-    public class UnitTestInputData1
+    public class UnitTestWrongInputData
     {
+        /// <summary>
+        /// Метод проверки с непригодными парасетрами.
+        /// </summary>
         [TestMethod]
-        public void TestInputData1()
+        public void TestWrongInputData()
         {
             //Переменная, в которой отмечается, пройден ли тест.
+            //Тест содержит такие параметры, при которых программа упадет.
             bool ItsOK = true;
             //Объявление параметров, которые поступают на вход маетодам экземплярам классов, которые проходят проверку.
-            int Rows = 3;
+            int Rows = -1;
             int Columns = 5000;
             double A = 1.621;
             double a = 0.542;
@@ -24,10 +31,10 @@ namespace CovarianceMatrix
             double sigma = 3.464;
             double teta = 0.286;
             double fi = 4.414;
-            
+
             //Объявление экземпляра формирующего фильтра.
             Practice.Filter.FormingFilter TestFormingFilter = null;
-            
+
             //Попытка инициализации этого экземплряра и запуск метода с данными параметрами.
             try
             {
@@ -38,10 +45,10 @@ namespace CovarianceMatrix
             {
                 ItsOK = false;
             }
-            
+
             //Объявление экземпляра матрицы коваиаций.
             Practice.Filter.Covariance TestMatrix = null;
-            
+
             //Попытка инициализации этого экземплряра и запуск метода с данными параметрами.
             try
             {
@@ -53,10 +60,10 @@ namespace CovarianceMatrix
             {
                 ItsOK = false;
             }
-            
+
             //Объявление экземпляра фильтра калмана.
             Practice.Filter.KalmanFilter TestKalmanFilter = null;
-            
+
             //Попытка инициализации этого экземплряра и запуск метода с данными параметрами.
             try
             {
@@ -67,9 +74,9 @@ namespace CovarianceMatrix
             {
                 ItsOK = false;
             }
-            
-            //Если при данных параметрах во время создания экземпляра или в ходе работы метода будет ошибка, то тест не будет пройден.
-            Assert.IsTrue(ItsOK);
+
+            //Если при данных параметрах во время создания экземпляра или в ходе работы метода будет ошибка, то тест будет пройден.
+            Assert.IsFalse(ItsOK);
         }
     }
 }

@@ -1,16 +1,20 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MainForm
+namespace Practice
 {
+    /// <summary>
+    /// Класс, содержащий методы проверки правильного подсчета дисперсии.
+    /// </summary>
     [TestClass]
     public class UnitTestDispersion
     {
+        /// <summary>
+        /// Метод проверки знака дисперсии.
+        /// </summary>
         [TestMethod]
         public void IsDispersionLargerThanZero()
         {
-            //Переменная, в которой отмечается, пройден ли тест.
-            bool ItsOK = true;
             //Объявление параметров, которые поступают на вход маетодам экземплярам классов, которые проходят проверку.
             int Rows = 3;
             int Columns = 5000;
@@ -33,31 +37,19 @@ namespace MainForm
             //Объявление экземпляра фильтра калмана и фильтрация.
             Practice.Filter.KalmanFilter TestKalmanFilter = new Practice.Filter.KalmanFilter(Rows, Columns, TestFormingFilter.X, TestMatrix);
             TestKalmanFilter.Filter();
-            
+
             //Коэфициенты для которых считается дисперсия.
             double[] factor = new double[3] { 0.2, 0.5, 0.8 };
-            try
+            for (int i = 0; i < 3; i++)
             {
-                for (int i = 0; i < 3; i++)
-                {
-                    //Если при подсчете дисперсия для формирующего фильтра  - отрицательна, то создаём ошибку с соответсвующим сообщением.
-                    if (Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestFormingFilter.X) < 0 )
-                    {
-                        throw new System.Exception("Дисперсия формирующего фильтра < 0, при коэффициенте="+factor.ToString());
-                    }
-                    //Если при подсчете дисперсия для  фильтра калмана дисперсия - отрицательна, то создаём ошибку с соответсвующим сообщением.
-                    if (Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestKalmanFilter.E) < 0)
-                    {
-                        throw new System.Exception("Дисперсия фильтра калмана < 0, при коэффициенте="+factor.ToString());
-                    }
-                }
+                //Если дисперсия при всех коэффициентах положительна, то тест пройден.
+
+                //Дисперсия для формирующего фильтра.
+                Assert.IsFalse(Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestFormingFilter.X) < 0);
+
+                //Дисперсия для  фильтра калмана. 
+                Assert.IsFalse(Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestKalmanFilter.E) < 0);
             }
-            catch (System.Exception e)
-            {
-                ItsOK = false;
-            }
-            //Если дисперсия при всех коэффициентах положительна, то тест пройден.
-            Assert.IsTrue(ItsOK);
         }
     }
 }

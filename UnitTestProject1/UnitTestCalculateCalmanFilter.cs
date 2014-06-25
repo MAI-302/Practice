@@ -1,18 +1,21 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Practice.Signal
+namespace Practice
 {
+    /// <summary>
+    /// Класс, содержащий методы проверки правильности работы фильтрации фильтра Калмана.
+    /// </summary>
     [TestClass]
     public class UnitTestCalculateCalmanFilter
     {
-        //Метод проверки Правильности работы фильтрации фильтра калмана.
+        /// <summary>
+        /// Метод проверки Правильности работы фильтрации фильтра Калмана.
+        /// </summary>
         [TestMethod]
         public void CalculateCalmanFilter()
         {
-            //Переменная, в которой отмечается, пройден ли тест.
-            bool ItsOK = true;
-            //Объявление параметров, для которых будет проверяться работа метода фильтра калмана.
+            //Объявление параметров, для которых будет проверяться работа метода фильтра Калмана.
             double tau = 0.01;
             double teta = 0.286;
             double sigma = 3.464;
@@ -39,24 +42,35 @@ namespace Practice.Signal
             Practice.Filter.KalmanFilter KF = new Practice.Filter.KalmanFilter(RowsCount, ColumnsCount, FF.X, CM);
             KF.Filter();
             
-             //Проверяем 3 первых значения сигнала после фильтрации фильтром калмана.
+            //Проверяем 3 первых значения сигнала после фильтрации фильтром Калмана.
             for (int i = 0; i < 3; i++)
             {
                 //Считаем значения по разностным формулам.
-                analyticallycalculateY1[i + 1] = analyticallycalculateY1[i] + KF.CovMatr.tau * (analyticallycalculateY2[i] + KF.CovMatr.CovarianceMatrix[0][0, i] * (FF.X[0, i] + KF.Noize.SignalArray[i] - analyticallycalculateY1[i]) / (2 * Math.PI * KF.CovMatr.factor[0] * KF.CovMatr.Sw));
-                analyticallycalculateY2[i + 1] = analyticallycalculateY2[i] + KF.CovMatr.tau * (KF.CovMatr.CovarianceMatrix[2][0, i] * (FF.X[0, i] + KF.Noize.SignalArray[i] - analyticallycalculateY1[i]) / (2 * Math.PI * KF.CovMatr.factor[0] * KF.CovMatr.Sw) - KF.CovMatr.ksi * analyticallycalculateY1[i] - KF.CovMatr.sigma * analyticallycalculateY2[i]);
-                if 
+                analyticallycalculateY1[i + 1] = analyticallycalculateY1[i] + KF.CovMatr.tau * 
+                    (
+                        analyticallycalculateY2[i] + KF.CovMatr.CovarianceMatrix[0][0, i] * 
+                        (
+                            (FF.X[0, i] + KF.Noize.SignalArray[i] - analyticallycalculateY1[i])/
+                            (2 * Math.PI * KF.CovMatr.factor[0] * KF.CovMatr.Sw)
+                        )
+                    );
+                //Считаем значения по разностным формулам. 
+                analyticallycalculateY2[i + 1] = analyticallycalculateY2[i] + KF.CovMatr.tau * 
+                    (
+                        KF.CovMatr.CovarianceMatrix[2][0, i] *
+                        (
+                            (FF.X[0, i] + KF.Noize.SignalArray[i] - analyticallycalculateY1[i])/
+                            (2 * Math.PI * KF.CovMatr.factor[0] * KF.CovMatr.Sw) - KF.CovMatr.ksi * analyticallycalculateY1[i] -
+                            KF.CovMatr.sigma * analyticallycalculateY2[i]
+                        )
+                    );
+                //Если значения не совпали с подсчитанными вручную, то тест не пройден.
+                Assert.IsFalse
                 (
                     KF.Y1[0, i + 1].ToString().Remove(4) != analyticallycalculateY1[i + 1].ToString().Remove(4) ||
                     KF.Y2[0, i + 1].ToString().Remove(4) != analyticallycalculateY2[i + 1].ToString().Remove(4)
-                )
-                {
-                    ItsOK = false;
-                }
-
+                );
             }
-            //Если значения совпали-тест пройден.
-            Assert.IsTrue(ItsOK);
         }
     }
 }

@@ -1,33 +1,38 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CovarianceMatrix
+namespace Practice
 {
-    //Класс, содержащий методы проверки правильности расчёта матрицы ковариаций.
+    /// <summary>
+    /// Класс, содержащий методы проверки правильности расчёта матрицы ковариаций.
+    /// </summary>
     [TestClass]
     public class UnitTestCalculateCovarianceMatrix
     {
-        //Объявление матрицы ковариаций.
+        /// <summary>
+        /// Объявление матрицы ковариаций.
+        /// </summary>
         public double[][,] CovarianceMatrix = new double[4][,];
-        //Метод проверки расчёта начальных значений.
+        //Входные параметры.
+        int Rows = 3;
+        int Columns = 5000;
+        double A = 1.621;
+        double a = 0.542;
+        double alpha = 1.732;
+        double beta = 2.903;
+        double Sw = 1.973;
+        double tau = 0.01;
+        double ksi = 11.427;
+        double sigma = 3.464;
+        double teta = 0.286;
+        double fi = 4.414;
+
+        /// <summary>
+        /// Метод проверки расчёта начальных значений.
+        /// </summary>
         [TestMethod]
         public void UnitTestCalculateInitialConditions()
         {
-            //Переменная, в которой отмечается, пройден ли тест.
-            bool ItsOK = true;
-            //Объявление параметров, для которых будет считаться матрица.
-            int Rows = 3;
-            int Columns = 5000;
-            double A = 1.621;
-            double a = 0.542;
-            double alpha = 1.732;
-            double beta = 2.903;
-            double Sw = 1.973;
-            double tau = 0.01;
-            double ksi = 11.427;
-            double sigma = 3.464;
-            double teta = 0.286;
-            double fi = 4.414;
             //Посчитанные вручную значения.
             double analyticallycalculate1 = 1.621;
             double analyticallycalculate2 = 11.479575;
@@ -36,66 +41,43 @@ namespace CovarianceMatrix
             //Создание экземпляра матрицы и расчёт её значений(начальных).
             Practice.Filter.Covariance TestMatrix = new Practice.Filter.Covariance(Rows, Columns, A, a, alpha, beta, Sw, tau, ksi, sigma, teta, fi);
             TestMatrix.CalculateCovarianceMatrix();
-            
-            //Ненужный кусок 
-            //for (int i = 0; i < CovarianceMatrix.Length; i++)
-            //CovarianceMatrix[i] = new double[Rows, Columns];
-            
-            //В цикле провереяем значения, если значения не совпали с подсчитанными вручную, то отмечаем в логической переменной.
+
+            //Если значения не совпали с подсчитанными вручную, то тест не пройден.
             for (int j = 0; j < Rows; j++)
             {
-
-                if (TestMatrix.CovarianceMatrix[0][j, 0] != analyticallycalculate1 &&
-                TestMatrix.CovarianceMatrix[1][j, 0] != analyticallycalculate2 &&
-                TestMatrix.CovarianceMatrix[2][j, 0] != analyticallycalculate3 &&
-                TestMatrix.CovarianceMatrix[3][j, 0] != analyticallycalculate3)
-                {
-                    ItsOK = false;
-                }
+                Assert.IsFalse
+                (
+                    TestMatrix.CovarianceMatrix[0][j, 0] != analyticallycalculate1 &&
+                    TestMatrix.CovarianceMatrix[1][j, 0] != analyticallycalculate2 &&
+                    TestMatrix.CovarianceMatrix[2][j, 0] != analyticallycalculate3 &&
+                    TestMatrix.CovarianceMatrix[3][j, 0] != analyticallycalculate3
+                );
             }
-            //Если все значения совпали-тест пройден.
-            Assert.IsTrue(ItsOK);
         }
 
+        /// <summary>
+        /// Метод проверки расчёта следующих после начальных значений.
+        /// </summary>
         [TestMethod]
         public void UnitTestCalculateNextValues()
         {
-            //Переменная, в которой отмечается, пройден ли тест.
-            bool ItsOK = true;
-            //Объявление параметров, для которых будет считаться матрица.
-            int Rows = 3;
-            int Columns = 5000;
-            double A = 1.621;
-            double a = 0.542;
-            double alpha = 1.732;
-            double beta = 2.903;
-            double Sw = 1.973;
-            double tau = 0.01;
-            double ksi = 11.427;
-            double sigma = 3.464;
-            double teta = 0.286;
-            double fi = 4.414;
             //Посчитанные вручную значения.
             double analyticallycalculate1 = 1.621;
             double analyticallycalculate2 = 11.479;
             double analyticallycalculate3 = -0.2553;
-            
+
             //Создание экземпляра матрицы и расчёт её значений(первых).
             Practice.Filter.Covariance TestMatrix = new Practice.Filter.Covariance(Rows, Columns, A, a, alpha, beta, Sw, tau, ksi, sigma, teta, fi);
             TestMatrix.CalculateCovarianceMatrix();
-            
-            //Если значения не совпали с подсчитанными вручную, то отмечаем в логической переменной.
-            if (
-                 TestMatrix.CovarianceMatrix[0][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate1).Remove(3) &&
-                 TestMatrix.CovarianceMatrix[1][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate2).Remove(3) &&
-                 TestMatrix.CovarianceMatrix[2][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate3).Remove(3) &&
-                 TestMatrix.CovarianceMatrix[3][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate3).Remove(3)
-               )
-            {
-                ItsOK = false;
-            }
-            //Если все значения совпали-тест пройден.
-            Assert.IsTrue(ItsOK);
+
+            //Если значения не совпали с подсчитанными вручную, то тест не пройден.
+            Assert.IsFalse
+            (
+                TestMatrix.CovarianceMatrix[0][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate1).Remove(3) &&
+                TestMatrix.CovarianceMatrix[1][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate2).Remove(3) &&
+                TestMatrix.CovarianceMatrix[2][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate3).Remove(3) &&
+                TestMatrix.CovarianceMatrix[3][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate3).Remove(3)
+            );
         }
     }
 }
