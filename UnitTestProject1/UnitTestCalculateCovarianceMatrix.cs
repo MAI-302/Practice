@@ -69,14 +69,16 @@ namespace Practice
             //Создание экземпляра матрицы и расчёт её значений(первых).
             Practice.Filter.Covariance TestMatrix = new Practice.Filter.Covariance(Rows, Columns, A, a, alpha, beta, Sw, tau, ksi, sigma, teta, fi);
             TestMatrix.CalculateCovarianceMatrix();
-
+            
+            //Точность округления значений.
+            int accuracy = 3;
             //Если значения не совпали с подсчитанными вручную, то тест не пройден.
             Assert.IsFalse
             (
-                TestMatrix.CovarianceMatrix[0][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate1).Remove(3) &&
-                TestMatrix.CovarianceMatrix[1][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate2).Remove(3) &&
-                TestMatrix.CovarianceMatrix[2][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate3).Remove(3) &&
-                TestMatrix.CovarianceMatrix[3][0, 1].ToString().Remove(3) != Convert.ToString(analyticallycalculate3).Remove(3)
+                Math.Round(TestMatrix.CovarianceMatrix[0][0, 1],accuracy) != Math.Round(analyticallycalculate1,accuracy) &&
+                Math.Round(TestMatrix.CovarianceMatrix[1][0, 1],accuracy) != Math.Round(analyticallycalculate2,accuracy) &&
+                Math.Round(TestMatrix.CovarianceMatrix[2][0, 1],accuracy) != Math.Round(analyticallycalculate3,accuracy) &&
+                Math.Round(TestMatrix.CovarianceMatrix[3][0, 1],accuracy) != Math.Round(analyticallycalculate3,accuracy)
             );
         }
     }
