@@ -42,6 +42,8 @@ namespace Practice
             Practice.Filter.KalmanFilter KF = new Practice.Filter.KalmanFilter(RowsCount, ColumnsCount, FF.X, CM);
             KF.Filter();
             
+            //Точность значений.
+            int accuracy=4;
             //Проверяем 3 первых значения сигнала после фильтрации фильтром Калмана.
             for (int i = 0; i < 3; i++)
             {
@@ -67,8 +69,8 @@ namespace Practice
                 //Если значения не совпали с подсчитанными вручную, то тест не пройден.
                 Assert.IsFalse
                 (
-                    KF.Y1[0, i + 1].ToString().Remove(4) != analyticallycalculateY1[i + 1].ToString().Remove(4) ||
-                    KF.Y2[0, i + 1].ToString().Remove(4) != analyticallycalculateY2[i + 1].ToString().Remove(4)
+                    Math.Round(KF.Y1[0, i + 1],accuracy) != Math.Round(analyticallycalculateY1[i + 1],accuracy) ||
+                    Math.Round(KF.Y2[0, i + 1],accuracy) != Math.Round(analyticallycalculateY2[i + 1],accuracy)
                 );
             }
         }
