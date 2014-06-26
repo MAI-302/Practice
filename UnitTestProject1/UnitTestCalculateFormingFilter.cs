@@ -35,6 +35,9 @@ namespace Practice
             Practice.Filter.FormingFilter FF = new Practice.Filter.FormingFilter(RowsCount, ColumnsCount, tau, ksi, sigma, teta, fi);
             FF.Filter();
             
+            //Точность округления значений.
+            int accuracy = 4;
+            
             //Проверяем 3 первых значения сигнала после фильтрации формирующим фильтром, они должны совпадать с аналитически посчитанными значениями.
             for (int i = 0; i < 3; i++)
             {
@@ -53,8 +56,8 @@ namespace Practice
                 //Если значения не совпали с подсчитанными вручную, то тест не пройден.
                 Assert.IsFalse
                 (
-                    FF.X[0, i + 1].ToString().Remove(4) != analyticallycalculateX[i + 1].ToString().Remove(4) ||
-                    FF.H[0, i + 1].ToString().Remove(4) != analyticallycalculateH[i + 1].ToString().Remove(4)
+                    Math.Round(FF.X[0, i + 1],accuracy) != Math.Round(analyticallycalculateX[i + 1],accuracy) ||
+                    Math.Round(FF.H[0, i + 1],accuracy) != Math.Round(analyticallycalculateH[i + 1],accuracy)
                 );
             }
         }
