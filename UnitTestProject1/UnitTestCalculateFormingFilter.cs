@@ -27,7 +27,7 @@ namespace Practice
             //Создаём нулевые массивы, в которые будем записывать аналитично посчитанные значения процесса после прохождения фильтрации.
             double[] analyticallycalculateX = { 0, 0, 0, 0 };
             double[] analyticallycalculateH = { 0, 0, 0, 0 };
-            
+         
             //Создаём случайный процесс и генерируем его.
             Practice.Signal.NormalDistributionSignal InitialSignal = new Practice.Signal.NormalDistributionSignal(0, Math.PI * 2 * Sv / tau);
             InitialSignal.GenerateSignal();
@@ -56,7 +56,7 @@ namespace Practice
                 //Если значения не совпали с подсчитанными вручную, то тест не пройден.
                 Assert.IsFalse
                 (
-                    Math.Round(FF.X[0, i + 1],accuracy) != Math.Round(analyticallycalculateX[i + 1],accuracy) ||
+                    Math.Round(FF.OutputSignal[0, i + 1],accuracy) != Math.Round(analyticallycalculateX[i + 1],accuracy) ||
                     Math.Round(FF.H[0, i + 1],accuracy) != Math.Round(analyticallycalculateH[i + 1],accuracy)
                 );
             }

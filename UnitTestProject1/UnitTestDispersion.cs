@@ -35,7 +35,7 @@ namespace Practice
             Practice.Filter.FormingFilter TestFormingFilter = new Practice.Filter.FormingFilter(Rows, Columns, tau, ksi, sigma, teta, fi);
             TestFormingFilter.Filter();
             //Объявление экземпляра фильтра калмана и фильтрация.
-            Practice.Filter.KalmanFilter TestKalmanFilter = new Practice.Filter.KalmanFilter(Rows, Columns, TestFormingFilter.X, TestMatrix);
+            Practice.Filter.KalmanFilter TestKalmanFilter = new Practice.Filter.KalmanFilter(Rows, Columns, TestFormingFilter.OutputSignal, TestMatrix);
             TestKalmanFilter.Filter();
 
             //Коэфициенты для которых считается дисперсия.
@@ -45,7 +45,7 @@ namespace Practice
                 //Если дисперсия при всех коэффициентах положительна, то тест пройден.
 
                 //Дисперсия для формирующего фильтра.
-                Assert.IsFalse(Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestFormingFilter.X) < 0);
+                Assert.IsFalse(Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestFormingFilter.OutputSignal) < 0);
 
                 //Дисперсия для  фильтра калмана. 
                 Assert.IsFalse(Practice.StatisticalCharacteristics.Variance((byte)factor[i], TestKalmanFilter.E) < 0);

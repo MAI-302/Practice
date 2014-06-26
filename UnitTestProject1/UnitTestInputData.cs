@@ -66,7 +66,7 @@ namespace Practice
             //Попытка инициализации этого экземплряра и запуск метода с данными параметрами.
             try
             {
-                TestKalmanFilter = new Practice.Filter.KalmanFilter(Rows, Columns, TestFormingFilter.X, TestMatrix);
+                TestKalmanFilter = new Practice.Filter.KalmanFilter(Rows, Columns, TestFormingFilter.OutputSignal, TestMatrix);
                 TestKalmanFilter.Filter();
             }
             catch (System.Exception e)
