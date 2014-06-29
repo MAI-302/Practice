@@ -15,7 +15,6 @@ namespace Practice
         [TestMethod]
         public void CalculateCalmanFilter()
         {
-            double s1, s2, s3, s4, s5;
             //Объявление параметров, для которых будет проверяться работа метода фильтра Калмана.
             double tau = 0.01;
             double teta = 0.286;
@@ -67,11 +66,6 @@ namespace Practice
                     );
                 
                 //Если значения не совпали с подсчитанными вручную, то тест не пройден.
-                s1 = Math.Round(KF.OutputSignal[0, i + 1], accuracy);
-                s2 = Math.Round(analyticallycalculateY1[i + 1], accuracy);
-                s3 = Math.Round(KF.Y2[0, i + 1], accuracy);
-                s4 = Math.Round(analyticallycalculateY2[i + 1], accuracy);
-                s5 = 5;
                 Assert.IsFalse
                 (
                     Math.Round(KF.OutputSignal[0, i + 1], accuracy) != Math.Round(analyticallycalculateY1[i + 1], accuracy) ||
