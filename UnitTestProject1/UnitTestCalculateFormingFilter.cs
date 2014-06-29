@@ -50,7 +50,8 @@ namespace Practice
                 //Считаем значения по разностным формулам.
                 analyticallycalculateH[i + 1] = analyticallycalculateH[i] + tau * 
                     (
-                        (fi - sigma * teta) * FF.InitialSignal.SignalArray[i] - sigma * analyticallycalculateH[i] - ksi * analyticallycalculateX[i]
+                        (fi - sigma * teta) * FF.InitialSignal.SignalArray[i] - 
+                        sigma * analyticallycalculateH[i] - ksi * analyticallycalculateX[i]
                     );
 
                 //Если значения не совпали с подсчитанными вручную, то тест не пройден.
