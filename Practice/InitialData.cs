@@ -1,50 +1,92 @@
 ﻿using System;
 using System.IO;
-using System.Text;
+using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace Practice
 {
     public class InitialData //может быть изменена пользователем
     {
-        public double tau { get; set; }
-        public double A { get; set; }
-        public double a { get; set; }
-        public double alpha { get; set; }
-        public double beta { get; set; }
-        public double Sv { get; set; }
-        public double[] factor = new double[3];
-        public int m { get; set; }
-        public int n { get; set; }
-        public void ReadInputData()
+        public double tau
         {
-            string path = "InputSd.txt";
-            int LinesCount = File.ReadAllLines(path).Length;
-            string[] SupportStringArray = new string[LinesCount - 1];
-            using (StreamReader Reader = new StreamReader(path, Encoding.Default))
+            get;
+            set;
+        }
+        public double A
+        {
+            get;
+            set;
+        }
+        public double a
+        {
+            get;
+            set;
+        }
+        public double alpha
+        {
+            get;
+            set;
+        }
+        public double beta
+        {
+            get;
+            set;
+        }
+        public double Sv
+        {
+            get;
+            set;
+        }
+        public double[] factor = new double[3];
+        public int m
+        {
+            get;
+            set;
+        }
+        public int n
+        {
+            get;
+            set;
+        }
+        public bool Load(string fileName)
+        {
+            bool res = false;
+
+            if (File.Exists(fileName)) // проверка на существование файла
             {
-                while (!Reader.EndOfStream)
-                    for (int i = 0; i < LinesCount; i++)
+                using (Stream fStream = File.OpenRead(fileName))
+                {
+                    try
                     {
-                        string MassiveLine = Reader.ReadLine();
-                        if (MassiveLine.Contains(" "))
-                        {
-                            string[] SplitLine = MassiveLine.Split(new Char[] { ' ', '\t' });
-                            for (int j = 0; j < SplitLine.Length; j++)
-                                factor[j] = Double.Parse(SplitLine[j]);
-                        }
-                        else
-                            SupportStringArray[i] = MassiveLine;
+                        InitialData ID = ((InitialData)(new XmlSerializer(typeof(InitialData))).Deserialize(fStream));
+                        tau = ID.tau;
+                        A = ID.A;
+                        a = ID.a;
+                        alpha = ID.alpha;
+                        beta = ID.beta;
+                        Sv = ID.Sv;
+                        factor = ID.factor;
+                        m = ID.m;
+                        n = ID.n;
+
+                        res = true;
                     }
-                Reader.Close();
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Ошибка загрузки параметров.", Application.ProductName);
+                    }
+                }
             }
-            tau = Double.Parse(SupportStringArray[0]);
-            A = Double.Parse(SupportStringArray[1]);
-            a = Double.Parse(SupportStringArray[2]);
-            alpha = Double.Parse(SupportStringArray[3]);
-            beta = Double.Parse(SupportStringArray[4]);
-            Sv = Double.Parse(SupportStringArray[5]);
-            m = Int32.Parse(SupportStringArray[6]);
-            n = Int32.Parse(SupportStringArray[7]);
-        } 
+
+            return res;
+        }
+
+        public void Save(string fileName)
+        {
+            using (Stream fStream = File.Create(fileName))
+            {
+                (new XmlSerializer(typeof(InitialData))).Serialize(fStream, this);
+            }
+        }
     }
 }
