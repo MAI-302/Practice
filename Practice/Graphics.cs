@@ -4,8 +4,7 @@ using ZedGraph;
 
 namespace Practice
 {
-    [Serializable]
-    public class Graphics
+    class Graphics
     {
         private ZedGraphControl zedGraph;
         public void DrawGraph(double[,] ArrayArray)
@@ -86,8 +85,6 @@ namespace Practice
             zedGraph.AxisChange();
             zedGraph.Refresh();
         }
-        public Graphics()
-        {}
         public Graphics(ref ZedGraphControl zdgrph) 
         {
             zedGraph = zdgrph;

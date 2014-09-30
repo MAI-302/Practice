@@ -81,11 +81,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller.cs" />
-    <Compile Include="Filter\BaseFilter.cs" />
-    <Compile Include="Filter\CovarianceMatrix.cs" />
-    <Compile Include="Filter\FormingFilter.cs" />
-    <Compile Include="Filter\KalmanFilter.cs" />
+    <Compile Include="ArraysForCalculations.cs" />
+    <Compile Include="CovarianceMatrix.cs" />
     <Compile Include="Graphics.cs" />
     <Compile Include="Help.cs">
       <SubType>Form</SubType>
@@ -93,6 +90,7 @@
     <Compile Include="Help.Designer.cs">
       <DependentUpon>Help.cs</DependentUpon>
     </Compile>
+    <Compile Include="IDistribution.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,10 +99,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Signal\BaseSignal.cs" />
-    <Compile Include="Signal\DeterministicSignal.cs" />
-    <Compile Include="Signal\NormalDistributionSignal.cs" />
     <Compile Include="StatisticalCharacteristics.cs" />
+    <Compile Include="InitialData.cs" />
     <EmbeddedResource Include="Help.resx">
       <DependentUpon>Help.cs</DependentUpon>
     </EmbeddedResource>
@@ -152,9 +148,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

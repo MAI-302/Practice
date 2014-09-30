@@ -50,15 +50,15 @@ namespace Practice
         }
         public bool Load(string fileName)
         {
-            bool res = false;
+            bool res = false; // Флаг
 
-            if (File.Exists(fileName)) // проверка на существование файла
+            if (File.Exists(fileName)) // Файл существует?
             {
-                using (Stream fStream = File.OpenRead(fileName))
+                using (Stream fStream = File.OpenRead(fileName)) // Открыть файл
                 {
                     try
                     {
-                        InitialData ID = ((InitialData)(new XmlSerializer(typeof(InitialData))).Deserialize(fStream));
+                        InitialData ID = ((InitialData)(new XmlSerializer(typeof(InitialData))).Deserialize(fStream)); // Сериализация fStream
                         tau = ID.tau;
                         A = ID.A;
                         a = ID.a;
@@ -73,7 +73,7 @@ namespace Practice
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Ошибка загрузки параметров.", Application.ProductName);
+                        MessageBox.Show("Ошибка загрузки параметров.", Application.ProductName); // Вывести на экран сообщение об ошибке
                     }
                 }
             }
@@ -83,9 +83,9 @@ namespace Practice
 
         public void Save(string fileName)
         {
-            using (Stream fStream = File.Create(fileName))
+            using (Stream fStream = File.Create(fileName)) // Создать файл
             {
-                (new XmlSerializer(typeof(InitialData))).Serialize(fStream, this);
+                (new XmlSerializer(typeof(InitialData))).Serialize(fStream, this); // Сериализация fStream
             }
         }
     }
