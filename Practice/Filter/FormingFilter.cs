@@ -8,13 +8,34 @@ namespace Practice.Filter
     {
         //OutputSignal[,] X
         private double[,] H;
+        /// <summary>
+        /// 
+        /// </summary>
         public double tau;
+        /// <summary>
+        /// 
+        /// </summary>
         public double teta;
+        /// <summary>
+        /// 
+        /// </summary>
         public double sigma;
+        /// <summary>
+        /// 
+        /// </summary>
         public double fi;
+        /// <summary>
+        /// 
+        /// </summary>
         public double ksi;
+        /// <summary>
+        /// 
+        /// </summary>
         public double Sv;
-        NormalDistributionSignal InitialSignal; //inputputsignal
+        /// <summary>
+        /// 
+        /// </summary>
+        NormalDistributionSignal InitialSignal; 
         public override void Filter()
         {
             for (int j = 0; j < RowsCount; j++)

@@ -30,6 +30,12 @@ namespace Practice
             zedGraph.AxisChange();
             zedGraph.Refresh();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ArrayArray"></param>
+        /// <param name="ArrayArray2"></param>
+        /// <param name="isAxisAdded"></param>
         public void DrawGraph(double[] ArrayArray, double[] ArrayArray2, bool isAxisAdded)
         {
             int i = 0;
