@@ -1,4 +1,6 @@
 ﻿using System;
+using Troschuetz.Random;
+
 namespace Practice
 {
     class CovarianceMatrix : ArraysForCalculations

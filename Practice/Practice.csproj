@@ -71,13 +71,13 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Troschuetz.Random">
-      <HintPath>F:\Troschuetz.Random.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\dll\Troschuetz.Random.dll</HintPath>
     </Reference>
     <Reference Include="ZedGraph">
-      <HintPath>F:\Practice-master\Practice-master\Practice\bin\Debug\ZedGraph.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\zedgraph_dll_v514_464\zedgraph_dll_v514_464\zedgraph_dll_v5.1.4\ZedGraph.dll</HintPath>
     </Reference>
     <Reference Include="ZedGraph.Web">
-      <HintPath>F:\Practice-master\Practice-master\Practice\bin\Debug\ZedGraph.Web.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\zedgraph_dll_v514_464\zedgraph_dll_v514_464\zedgraph_dll_v5.1.4\ZedGraph.Web.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +118,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="Practice_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
