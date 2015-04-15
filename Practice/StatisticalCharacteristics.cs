@@ -9,12 +9,6 @@ namespace Practice
     public static class StatisticalCharacteristics
     {
         public static double SupportExpactationValue;
-        /// <summary>
-        /// Метод, считающий М.О. для выбранного вектора с учетом выбранного фактора.
-        /// </summary>
-        /// <param name="FactorChosen"></param>
-        /// <param name="ArrayForExpValue">Вектор, для которого считается М.О.</param>
-        /// <returns>Возвращает М.О.</returns>
         public static double ExpectationValue(int FactorChosen, double[,] ArrayForExpValue)
         {
             double ExpectValue = 0;
@@ -23,12 +17,6 @@ namespace Practice
             SupportExpactationValue = ExpectValue / (ArrayForExpValue.GetLength(1) - 301);
             return SupportExpactationValue;
         }
-        /// <summary>
-        /// Метод, считающий Дисперсию для выбранного вектора с учетом выбранного фактора.
-        /// </summary>
-        /// <param name="FactorChosen"></param>
-        /// <param name="ArrayForExpValue">Вектор, для которого считается Дисперсия.</param>
-        /// <returns>Возвращает Дисперсию.</returns>
         public static double Variance(int FactorChosen, double[,] ArrayForExpValue)
         {
             double Dispersion = 0;
